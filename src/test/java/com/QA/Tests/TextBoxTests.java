@@ -1,4 +1,4 @@
-package com.QA.Automation;
+package com.QA.Tests;
 
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;

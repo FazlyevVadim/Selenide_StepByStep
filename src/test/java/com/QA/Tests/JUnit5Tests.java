@@ -1,4 +1,4 @@
-package com.QA.Automation;
+package com.QA.Tests;
 
 import org.junit.jupiter.api.*;
 
