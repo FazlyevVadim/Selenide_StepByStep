@@ -3,7 +3,8 @@ package com.QA.Tests;
 import com.codeborne.selenide.Configuration;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
+
+import java.io.File;
 
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
@@ -15,6 +16,7 @@ public class StudentRegistrationForm {
 
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
+        //Configuration.browserSize = "2048x1080";
     }
 
     @Test
@@ -36,12 +38,22 @@ public class StudentRegistrationForm {
         $(".react-datepicker__day--012").click(); //day
         $(".subjects-auto-complete__value-container").click(); //container
         $("#subjectsInput").setValue("English").pressEnter();
-        $("#hobbies-checkbox-1").parent().click(); //hobbies  parent()???
-        //$(".form-file-label").click(); //choose file
-        $("#currentAddress").setValue("City Kydrovo, Street Angliiskaya 2"); // Current Address
+        $("#hobbies-checkbox-1").parent().click(); //hobbies  parent()???   $(new ByText("Sports")).click()
+
+        ///////////
 
 
+        $(".form-file-label").click(); //choose file
+        //File file = $(".form-file-label").uploadFromClasspath("111.txt");
+        $("input#uploadPicture").uploadFile(new File(" /Users/c0ldeyes/IdeaProjects/Selenium/111.txt"));
 
+
+        /////////////
+        //Не трогать!
+        //$("file.form-file-label").uploadFromClasspath("111.txt"); downloadFolder?
+        //$("#currentAddress").setValue("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"); // Current Address
+        //$("#state").scrollIntoView(true).doubleClick(); //state
+        //$("#city").doubleClick(); //city
 
 
     }
