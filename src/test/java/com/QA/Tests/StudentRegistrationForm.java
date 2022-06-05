@@ -45,7 +45,7 @@ public class StudentRegistrationForm {
 
         $(".form-file-label").click(); //choose file
         //File file = $(".form-file-label").uploadFromClasspath("111.txt");
-        $("input#uploadPicture").uploadFile(new File(" /Users/c0ldeyes/IdeaProjects/Selenium/111.txt"));
+        $("input#uploadPicture").uploadFile(new File("Устройства.txt"));
 
 
         /////////////
