@@ -1,6 +1,7 @@
 package com.QA.Tests;
 
 import com.codeborne.selenide.Configuration;
+import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -16,7 +17,8 @@ public class StudentRegistrationForm {
 
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
-        //Configuration.browserSize = "2048x1080";
+        Configuration.browserSize = "2560x1600";
+
     }
 
     @Test
@@ -39,21 +41,14 @@ public class StudentRegistrationForm {
         $(".subjects-auto-complete__value-container").click(); //container
         $("#subjectsInput").setValue("English").pressEnter();
         $("#hobbies-checkbox-1").parent().click(); //hobbies  parent()???   $(new ByText("Sports")).click()
-
-        ///////////
-
-
-        $(".form-file-label").click(); //choose file
-        //File file = $(".form-file-label").uploadFromClasspath("111.txt");
-        $("input#uploadPicture").uploadFile(new File("Устройства.txt"));
+        $("input#uploadPicture").uploadFile(new File("TestFile.txt"));
+        $("#currentAddress").setValue("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"); // Current Address
+        $("#state").scrollIntoView(true).doubleClick(); //state
+        $("#city").doubleClick(); //city
+        Selenide.executeJavaScript("$('footer').remove()");
 
 
-        /////////////
-        //Не трогать!
-        //$("file.form-file-label").uploadFromClasspath("111.txt"); downloadFolder?
-        //$("#currentAddress").setValue("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"); // Current Address
-        //$("#state").scrollIntoView(true).doubleClick(); //state
-        //$("#city").doubleClick(); //city
+        //$(byName("Submit")).shouldBe(visible);
 
 
     }
