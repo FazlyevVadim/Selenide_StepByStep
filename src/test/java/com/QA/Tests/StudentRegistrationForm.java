@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 
+import static com.codeborne.selenide.Condition.text;
+import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
@@ -17,7 +19,7 @@ public class StudentRegistrationForm {
 
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
-        Configuration.browserSize = "2560x1600";
+        //Configuration.browserSize = "2560x1600";
 
     }
 
@@ -46,9 +48,14 @@ public class StudentRegistrationForm {
         $("#state").scrollIntoView(true).doubleClick(); //state
         $("#city").doubleClick(); //city
         Selenide.executeJavaScript("$('footer').remove()");
+        Selenide.executeJavaScript("$('#close-fixedban').remove()");
+        $(byText("Submit")).click();
 
+        //TableCheckResults
 
-        //$(byName("Submit")).shouldBe(visible);
+        $(".table-responsive").shouldHave(text("Vadim Fazlyev"), text("FazlyevVR@yandex.ru"), text("Male"), text("9196112576"), text("12 April,1987"),
+                text("English"), text("Sports"), text("TestFile.txt"), text("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"), text("Haryana Karnal"));
+        //$(".table-responsive").shouldHave(text("FazlyevVR@yandex.ru"));
 
 
     }
