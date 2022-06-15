@@ -5,21 +5,25 @@ import com.codeborne.selenide.Selenide;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.io.File;
-
+import static com.QA.Utils.RandomUtils.getRandomEmail;
+import static com.QA.Utils.RandomUtils.getRandomString;
 import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 public class StudentRegistrationForm {
+    String firstName = getRandomString(10),
+            lastName = getRandomString(7),
+            email = getRandomEmail();
 
+    //String expectedFullName = format("%s %s", firstName, lastName); - example
     @BeforeAll
     static void setUp() {
 
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
-        //Configuration.browserSize = "2560x1600";
+        //Configuration.browserSize = "1920x1080";
 
     }
 
@@ -27,9 +31,10 @@ public class StudentRegistrationForm {
     void fillForm() {
 
         open("/automation-practice-form");
-        $("#firstName").setValue("Vadim");
-        $("#lastName").setValue("Fazlyev");
-        $("#userEmail").setValue("FazlyevVR@yandex.ru");
+        $(".practice-form-wrapper").shouldHave(text("Student Registration Form")); //what for?
+        $("#firstName").setValue(firstName);
+        $("#lastName").setValue(lastName);
+        $("#userEmail").setValue(email);
         $("#gender-radio-1").doubleClick();
         $("#userNumber").setValue("9196112576");
         $("#dateOfBirthInput").click();
@@ -42,8 +47,8 @@ public class StudentRegistrationForm {
         $(".react-datepicker__day--012").click(); //day
         $(".subjects-auto-complete__value-container").click(); //container
         $("#subjectsInput").setValue("English").pressEnter();
-        $("#hobbies-checkbox-1").parent().click(); //hobbies  parent()???   $(new ByText("Sports")).click()
-        $("input#uploadPicture").uploadFile(new File("TestFile.txt"));
+        $("#hobbies-checkbox-1").parent().click(); //hobbies  parent()???  - клик на уровень выше   $(new ByText("Sports")).click()
+        $("#uploadPicture").uploadFromClasspath("img/1.png");
         $("#currentAddress").setValue("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"); // Current Address
         $("#state").scrollIntoView(true).doubleClick(); //state
         $("#city").doubleClick(); //city
@@ -52,9 +57,10 @@ public class StudentRegistrationForm {
         $(byText("Submit")).click();
 
         //TableCheckResults
+        $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
 
-        $(".table-responsive").shouldHave(text("Vadim Fazlyev"), text("FazlyevVR@yandex.ru"), text("Male"), text("9196112576"), text("12 April,1987"),
-                text("English"), text("Sports"), text("TestFile.txt"), text("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"), text("Haryana Karnal"));
+        $(".table-responsive").shouldHave(text(firstName + " " + lastName), text(email), text("Male"), text("9196112576"), text("12 April,1987"),
+                text("English"), text("Sports"), text("1.png"), text("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"), text("Haryana Karnal"));
         //$(".table-responsive").shouldHave(text("FazlyevVR@yandex.ru"));
 
 
