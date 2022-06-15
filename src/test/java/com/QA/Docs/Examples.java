@@ -5,14 +5,14 @@ public class Examples {
 
 
         //debug process
-        //red dot +run debug + copy selector + evaulete
+        // red dot +run debug + copy selector + evaulete
 
         //css selectors
         // "[id=email]" = "#email"
         // "[class=email]" = ".email"
 
         //String examples
-        //String expectedFullName = format("%s %s", firstName, lastName);
+        // String expectedFullName = format("%s %s", firstName, lastName);
         // String firstName = "Vadim",
         //            lastName = "Fazlyev",
     }
