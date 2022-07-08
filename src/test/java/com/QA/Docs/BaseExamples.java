@@ -1,6 +1,6 @@
 package com.QA.Docs;
 
-public class Examples {
+public class BaseExamples {
     void cssXpathExamples() {
 
 

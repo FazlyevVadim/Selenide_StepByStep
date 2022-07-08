@@ -2,7 +2,6 @@ package com.QA.Tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
-import com.github.javafaker.Faker;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -10,17 +9,15 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
+import static java.lang.String.format;
 
-public class StudentRegistrationForm {
+public class StudentRegistrationForm1LessonFormat {
 
-    Faker faker = new Faker();
-    String firstName = faker.name().firstName(),        //getRandomString(10),
-            lastName = faker.name().lastName(),        //getRandomString(7),
-            email = faker.internet().emailAddress(),
-            currentAddress = faker.rickAndMorty().quote();   //getRandomEmail();
+    String firstName = "Vadim",
+            lastName = "Fazlyev",
+            email = "FazlyevVR@yandex.ru";
+    String fullName = format("%s %s", firstName, lastName);
 
-
-    //String expectedFullName = format("%s %s", firstName, lastName); - example
     @BeforeAll
     static void setUp() {
 
@@ -54,7 +51,7 @@ public class StudentRegistrationForm {
         $("#subjectsInput").setValue("English").pressEnter();
         $("#hobbies-checkbox-1").parent().click(); //hobbies  parent()???  - клик на уровень выше   $(new ByText("Sports")).click()
         $("#uploadPicture").uploadFromClasspath("img/1.png");
-        $("#currentAddress").setValue(currentAddress); // Current Address
+        $("#currentAddress").setValue("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"); // Current Address
         $("#state").scrollIntoView(true).doubleClick(); //state
         $("#city").doubleClick(); //city
         Selenide.executeJavaScript("$('footer').remove()");
@@ -64,7 +61,7 @@ public class StudentRegistrationForm {
         //TableCheckResults
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
 
-        $(".table-responsive").shouldHave(text(firstName + " " + lastName), text(email), text("Male"), text("9196112576"), text("12 April,1987"),
+        $(".table-responsive").shouldHave(text(fullName), text(email), text("Male"), text("9196112576"), text("12 April,1987"),
                 text("English"), text("Sports"), text("1.png"), text("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"), text("Haryana Karnal"));
 
 
