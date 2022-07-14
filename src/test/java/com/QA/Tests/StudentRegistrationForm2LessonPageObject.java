@@ -19,7 +19,7 @@ public class StudentRegistrationForm2LessonPageObject {
             eMail = faker.internet().emailAddress(),
             currentAddress = faker.address().country(),
             phoneNumber = faker.numerify("##########");
-    ;
+
     String fullName = format("%s %s", firstName, lastName);
 
 
@@ -29,13 +29,10 @@ public class StudentRegistrationForm2LessonPageObject {
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
         //Configuration.browserSize = "1920x1080";
-
-
     }
 
     @Test
     void fillForm() {
-
         registrationFormPageObject.openPage()
                 .setFirstName(firstName)
                 .setLastName(lastName)
@@ -50,11 +47,8 @@ public class StudentRegistrationForm2LessonPageObject {
                 .setState("Haryana")
                 .setCity("Karnal")
                 .clickSubmit("Submit");
-
-
         //TableCheckResults
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
-
 
         registrationFormPageObject.checkTableName("Thanks for submitting the form");
 
@@ -68,7 +62,5 @@ public class StudentRegistrationForm2LessonPageObject {
                 .checkResult("Picture", "1.png")
                 .checkResult("Address", currentAddress)
                 .checkResult("State and City", "Haryana Karnal");
-
-
     }
 }
