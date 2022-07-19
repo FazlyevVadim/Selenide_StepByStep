@@ -20,17 +20,6 @@ public class JUnit5HomeWork {
     static void openChromePetrovich() {
         Configuration.holdBrowserOpen = true;
     }
-
-    @BeforeAll
-    static void openChromePetrovichParametrizedTest() {
-        Configuration.holdBrowserOpen = true;
-    }
-
-    @BeforeAll
-    static void openChromePetrovichParametrizedHardTest() {
-        Configuration.holdBrowserOpen = true;
-    }
-
     @DisplayName("Петрович поисковик")
     @Test
     void homeWorkPetrovich() {
