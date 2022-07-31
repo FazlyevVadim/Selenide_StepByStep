@@ -19,14 +19,10 @@ public class StudentRegistrationForm1Lesson {
         Configuration.holdBrowserOpen = true;
         Configuration.baseUrl = "https://demoqa.com";
         //Configuration.browserSize = "1920x1080";
-
-
     }
 
     @Test
     void fillForm() {
-
-
         open("/automation-practice-form");
         $(".practice-form-wrapper").shouldHave(text("Student Registration Form")); //what for?
         $("#firstName").setValue("Vadim");
@@ -58,7 +54,5 @@ public class StudentRegistrationForm1Lesson {
 
         $(".table-responsive").shouldHave(text("Vadim" + " " + "Fazlyev"), text("FazlyevVR@yandex.ru"), text("Male"), text("9196112576"), text("12 April,1987"),
                 text("English"), text("Sports"), text("1.png"), text("City Kydrovo near Saint-Petersburg, Street Angliskaya 2"), text("Haryana Karnal"));
-
-
     }
 }
