@@ -44,7 +44,7 @@ public class SelenideDownloadTest {
         InputStream stream = cl.getResourceAsStream("pdf/NumbersOfJuly.pdf");
         PDF pdf = new PDF(stream);
         Assertions.assertEquals(1, pdf.numberOfPages);
-        assertThat(pdf, new ContainsExactText("123"));
+        assertThat(pdf, new ContainsExactText("044525974"));
         //InputStream is = new FileInputStream("pdf/NumbersOfJuly.pdf");
     }
 
@@ -52,7 +52,8 @@ public class SelenideDownloadTest {
     void xlsParsingTest() throws Exception {
         InputStream stream = cl.getResourceAsStream("xls/file_example_XLS_10.xls");
         XLS xls = new XLS(stream);
-        String stringCellValue = xls.excel.getSheetAt(0).getRow(0).getCell(0).getStringCellValue();
+        //String stringCellValue = xls.excel.getSheetAt(0).getRow(0).getCell(0).getStringCellValue();
+        String stringCellValue = xls.excel.getSheetAt(1).getRow(1).getCell(1).getStringCellValue();
         org.assertj.core.api.Assertions.assertThat(stringCellValue).contains("JUnit 5");
     }
 
@@ -62,9 +63,9 @@ public class SelenideDownloadTest {
              CSVReader reader = new CSVReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
             List<String[]> content = reader.readAll();
             org.assertj.core.api.Assertions.assertThat(content).contains(
-                    new String[]{"Name", "Surname"},
-                    new String[]{"Vadim", "Fazlyev"},
-                    new String[]{"Ravil", "Razetdinov"}
+                    new String[]{"Name", " Surname"},
+                    new String[]{"Vadim", " Fazlyev"},
+                    new String[]{"Ravil", " Razetdinov"}
             );
         }
     }
@@ -74,12 +75,16 @@ public class SelenideDownloadTest {
         ZipFile zf = new ZipFile(new File("/Users/c0ldeyes/IdeaProjects/Selenium/src/test/resources/zip/file_example_XLS_10xls.zip"));
         ZipInputStream is = new ZipInputStream(cl.getResourceAsStream("zip/file_example_XLS_10xls.zip"));
         ZipEntry entry;
+
         while ((entry = is.getNextEntry()) != null) {
-            org.assertj.core.api.Assertions.assertThat(entry.getName()).isEqualTo("file_example_XLS_10xls.zip");
+            // if (entry.isDirectory()) {
+            //    System.out.println();
+
+
+            org.assertj.core.api.Assertions.assertThat(entry.getName()).isEqualTo("file_example_XLS_10.xls");
             try (InputStream inputStream = zf.getInputStream(entry)) {
                 //checks
             }
-
         }
     }
 }
